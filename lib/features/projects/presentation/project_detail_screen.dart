@@ -122,9 +122,88 @@ class ProjectDetailScreen extends ConsumerWidget {
                       vertical: 10,
                     ),
                     itemCount: updatedProject.sessions.length,
+
+                    // itemBuilder: (_, index) {
+                    //   final session = updatedProject.sessions[index];
+                    //   return _buildSessionCard(session);
+                    // },
                     itemBuilder: (_, index) {
                       final session = updatedProject.sessions[index];
-                      return _buildSessionCard(session);
+
+                      return Dismissible(
+                        key: Key("${updatedProject.id}_session_$index"),
+                        direction: DismissDirection.endToStart,
+
+                        // Background (swipe reveal)
+                        background: Container(
+                          margin: const EdgeInsets.only(bottom: 14),
+                          padding: const EdgeInsets.only(right: 20),
+                          alignment: Alignment.centerRight,
+                          decoration: BoxDecoration(
+                            color: Colors.redAccent,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: const Icon(
+                            Icons.delete,
+                            color: Colors.white,
+                            size: 28,
+                          ),
+                        ),
+
+                        // Confirmation dialog
+                        confirmDismiss: (direction) async {
+                          return await showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                backgroundColor: const Color(0xff1A2A4A),
+                                title: const Text(
+                                  "Delete Session?",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                content: Text(
+                                  "Are you sure you want to delete this session?",
+                                  style: const TextStyle(color: Colors.white70),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: const Text(
+                                      "Cancel",
+                                      style: TextStyle(color: Colors.white70),
+                                    ),
+                                    onPressed: () =>
+                                        Navigator.pop(context, false),
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.redAccent,
+                                    ),
+                                    child: const Text(
+                                      "Delete",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    onPressed: () =>
+                                        Navigator.pop(context, true),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+
+                        // Actual deletion
+                        onDismissed: (_) {
+                          ref
+                              .read(projectControllerProvider.notifier)
+                              .deleteSession(updatedProject.id, index);
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Session deleted")),
+                          );
+                        },
+
+                        child: _buildSessionCard(session),
+                      );
                     },
                   ),
           ),

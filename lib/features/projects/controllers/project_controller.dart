@@ -17,14 +17,10 @@ class ProjectController extends Notifier<List<Project>> {
   void addProject(String name) async {
     final id = const Uuid().v4();
 
-    final project = Project(
-      id: id,
-      name: name,
-      sessions: [],
-    );
+    final project = Project(id: id, name: name, sessions: []);
 
     await _repository.addProject(project);
-    state = _repository.getProjects(); // refresh UI
+    state = _repository.getProjects();
   }
 
   void deleteProject(String id) async {
@@ -34,6 +30,11 @@ class ProjectController extends Notifier<List<Project>> {
 
   void addSession(String projectId, WorkSession session) async {
     await _repository.addSession(projectId, session);
+    state = _repository.getProjects();
+  }
+
+  void deleteSession(String projectId, int sessionIndex) async {
+    await _repository.deleteSession(projectId, sessionIndex);
     state = _repository.getProjects();
   }
 }

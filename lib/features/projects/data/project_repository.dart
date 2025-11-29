@@ -41,4 +41,20 @@ class ProjectRepository {
 
     await _projectBox.put(projectId, updated);
   }
+
+  // Delete a session from project
+  Future<void> deleteSession(String projectId, int sessionIndex) async {
+    final project = _projectBox.get(projectId);
+    if (project == null) return;
+
+    final updatedSessions = [...project.sessions]..removeAt(sessionIndex);
+
+    final updatedProject = Project(
+      id: project.id,
+      name: project.name,
+      sessions: updatedSessions,
+    );
+
+    await _projectBox.put(projectId, updatedProject);
+  }
 }

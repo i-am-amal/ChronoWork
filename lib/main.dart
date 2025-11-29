@@ -1,8 +1,8 @@
+import 'package:chronowork/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chronowork/services/hive_services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:chronowork/features/projects/presentation/project_list_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
               displaySmall: TextStyle(color: Colors.white70, fontSize: 14),
             ),
           ),
-          home: const ProjectListScreen(),
+          home: const SplashScreen(),
         );
       },
     );
