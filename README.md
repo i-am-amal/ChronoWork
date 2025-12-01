@@ -1,16 +1,37 @@
-# chronowork
+# ⏱️ ChronoWork  
+A clean, minimal, and fully offline time tracker built with Flutter.  
+Track your work sessions, organize projects, and stay productive — all without an internet connection.
 
-A new Flutter project.
+---
 
-## Getting Started
+## 📱 Features
 
-This project is a starting point for a Flutter application.
+- 🗂️ **Project Management**  
+  Create and organize multiple projects with ease.
 
-A few resources to get you started if this is your first Flutter project:
+- ⏱️ **Session Tracking**  
+  Track your work or study sessions using a built-in timer.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 📊 **Session History**  
+  View logged sessions for each project with timestamps and durations.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- 🔒 **100% Offline & Private**  
+  No data collection. No login. Everything stays on your device using Hive local storage.
+
+- 🎨 **Modern & Clean UI**  
+  Designed for simplicity and focus.
+
+---
+
+## 🚀 Tech Stack
+
+- **Flutter**
+- **Dart**
+- **Riverpod** (state management)
+- **Hive** (local storage)
+- **Lottie** (animations)
+- **Flutter ScreenUtil** (responsive UI)
+
+---
+git clone https://github.com/your-username/chronowork.git
+cd chronowork
