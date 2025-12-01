@@ -33,5 +33,3 @@ Track your work sessions, organize projects, and stay productive — all without
 - **Flutter ScreenUtil** (responsive UI)
 
 ---
-git clone https://github.com/your-username/chronowork.git
-cd chronowork
