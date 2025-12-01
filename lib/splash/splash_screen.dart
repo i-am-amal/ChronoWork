@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:chronowork/features/projects/presentation/project_list_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -61,9 +62,9 @@ class _SplashScreenState extends State<SplashScreen>
             position: _slide,
             child: Text(
               "ChronoWork",
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
-                fontSize: 36,
+                fontSize: 36.sp,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1.5,
               ),

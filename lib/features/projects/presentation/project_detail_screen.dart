@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../controllers/project_providers.dart';
 import '../controllers/timer_controller.dart';
 import '../../projects/data/project_model.dart';
@@ -16,20 +17,15 @@ class ProjectDetailScreen extends ConsumerWidget {
       (p) => p.id == project.id,
       orElse: () => project,
     );
-
     final timer = ref.watch(timerControllerProvider);
-
     final bool isThisProjectRunning =
         timer.isRunning && timer.activeProjectId == updatedProject.id;
-
     return Scaffold(
       backgroundColor: const Color(0xff0E1D3E),
-
-      // ---------------- CUSTOM APP BAR ---------------- //
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(65),
+        preferredSize: Size.fromHeight(65.h),
         child: Container(
-          padding: const EdgeInsets.only(top: 40, left: 12, right: 12),
+          padding: EdgeInsets.only(top: 40.h, left: 12.w, right: 12.w),
           decoration: const BoxDecoration(color: Color(0xff0E1D3E)),
           child: Row(
             children: [
@@ -37,29 +33,23 @@ class ProjectDetailScreen extends ConsumerWidget {
                 icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
                 onPressed: () => Navigator.pop(context),
               ),
-
-              const SizedBox(width: 4),
-
-              // Project title
+              SizedBox(width: 4.w),
               Text(
                 updatedProject.name,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
-                  fontSize: 22,
+                  fontSize: 22.sp,
                   fontWeight: FontWeight.bold,
-                  letterSpacing: 0.3,
+                  letterSpacing: 0.5,
                 ),
               ),
             ],
           ),
         ),
       ),
-
       body: Column(
         children: [
-          const SizedBox(height: 20),
-
-          // ---------------- TIMER SECTION ---------------- //
+          SizedBox(height: 20.h),
           _buildTimerSection(
             context,
             ref,
@@ -68,21 +58,18 @@ class ProjectDetailScreen extends ConsumerWidget {
             updatedProject.id,
             projects,
           ),
-
-          const SizedBox(height: 25),
-
-          // ---------------- TOTAL TIME ---------------- //
+          SizedBox(height: 25.h),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18),
+            padding: EdgeInsets.symmetric(horizontal: 18.w),
             child: Row(
               children: [
-                const Icon(Icons.schedule, color: Colors.white70, size: 22),
-                const SizedBox(width: 10),
+                Icon(Icons.schedule, color: Colors.white70, size: 22.sp),
+                SizedBox(width: 10.w),
                 Text(
                   "Total Time: ${_formatTotalDuration(updatedProject.sessions)}",
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white70,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -90,22 +77,22 @@ class ProjectDetailScreen extends ConsumerWidget {
             ),
           ),
 
-          const SizedBox(height: 18),
+          SizedBox(height: 18.h),
 
           // ---------------- SESSIONS TITLE ---------------- //
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18),
+            padding: EdgeInsets.symmetric(horizontal: 18.w),
             child: Text(
               "Sessions",
               style: TextStyle(
                 color: Colors.white.withValues(alpha: 0.9),
-                fontSize: 20,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
 
-          const SizedBox(height: 12),
+          SizedBox(height: 12.h),
 
           // ---------------- SESSION LIST ---------------- //
           Expanded(
@@ -117,40 +104,31 @@ class ProjectDetailScreen extends ConsumerWidget {
                     ),
                   )
                 : ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 18,
-                      vertical: 10,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 18.w,
+                      vertical: 10.h,
                     ),
                     itemCount: updatedProject.sessions.length,
-
-                    // itemBuilder: (_, index) {
-                    //   final session = updatedProject.sessions[index];
-                    //   return _buildSessionCard(session);
-                    // },
                     itemBuilder: (_, index) {
                       final session = updatedProject.sessions[index];
 
                       return Dismissible(
                         key: Key("${updatedProject.id}_session_$index"),
                         direction: DismissDirection.endToStart,
-
-                        // Background (swipe reveal)
                         background: Container(
-                          margin: const EdgeInsets.only(bottom: 14),
-                          padding: const EdgeInsets.only(right: 20),
+                          margin: EdgeInsets.only(bottom: 14.h),
+                          padding: EdgeInsets.only(right: 20.w),
                           alignment: Alignment.centerRight,
                           decoration: BoxDecoration(
                             color: Colors.redAccent,
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(16.r),
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.delete,
                             color: Colors.white,
-                            size: 28,
+                            size: 28.sp,
                           ),
                         ),
-
-                        // Confirmation dialog
                         confirmDismiss: (direction) async {
                           return await showDialog(
                             context: context,
@@ -190,8 +168,6 @@ class ProjectDetailScreen extends ConsumerWidget {
                             },
                           );
                         },
-
-                        // Actual deletion
                         onDismissed: (_) {
                           ref
                               .read(projectControllerProvider.notifier)
@@ -227,20 +203,20 @@ class ProjectDetailScreen extends ConsumerWidget {
         children: [
           Text(
             "⏱ ${_formatDuration(timer.elapsed)}",
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
-              fontSize: 28,
+              fontSize: 28.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 12),
+          SizedBox(height: 12.h),
           ElevatedButton.icon(
             icon: const Icon(Icons.stop),
             label: const Text("Stop Timer"),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.redAccent,
               foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -265,8 +241,10 @@ class ProjectDetailScreen extends ConsumerWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.deepPurpleAccent,
         foregroundColor: Colors.white,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.r),
+        ),
       ),
       onPressed: () {
         if (timer.isRunning && timer.activeProjectId != projectId) {
@@ -297,39 +275,39 @@ class ProjectDetailScreen extends ConsumerWidget {
 
   Widget _buildSessionCard(session) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 14),
-      padding: const EdgeInsets.all(16),
+      margin: EdgeInsets.only(bottom: 14.h),
+      padding: EdgeInsets.all(16.h),
       decoration: BoxDecoration(
         color: const Color(0xFF182A52),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.25),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            blurRadius: 10.r,
+            offset: Offset(0, 4.h),
           ),
         ],
       ),
       child: Row(
         children: [
-          const Icon(Icons.access_time, color: Colors.white70, size: 24),
-          const SizedBox(width: 14),
+          Icon(Icons.access_time, color: Colors.white70, size: 24.sp),
+          SizedBox(width: 14.w),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   _formatDate(session.start),
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const SizedBox(height: 4),
+                SizedBox(height: 4.h),
                 Text(
                   "${_formatTime(session.start)} → ${_formatTime(session.end)}",
-                  style: const TextStyle(color: Colors.white70, fontSize: 14),
+                  style: TextStyle(color: Colors.white70, fontSize: 14.sp),
                 ),
               ],
             ),

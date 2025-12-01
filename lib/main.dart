@@ -1,12 +1,29 @@
 import 'package:chronowork/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chronowork/services/hive_services.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await HiveService.init();
+
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      statusBarColor: const Color(0xff0E1D3E),
+      //  Background color (Android)
+      statusBarBrightness: Brightness.dark,
+      //  Controls text/icons on iOS (Light mode)
+      statusBarIconBrightness:
+          Brightness.light, // Controls text/icons on Android
+    ),
+  );
+
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   runApp(const ProviderScope(child: MyApp()));
 }

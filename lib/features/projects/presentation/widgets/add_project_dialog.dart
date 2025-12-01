@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../controllers/project_providers.dart';
 
 class AddProjectDialog extends ConsumerStatefulWidget {
@@ -23,19 +24,15 @@ class _AddProjectDialogState extends ConsumerState<AddProjectDialog> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ----------- Title ----------- //
             Text(
               "Add Project",
               style: TextStyle(
                 color: Colors.white.withValues(alpha: 0.95),
-                fontSize: 22,
+                fontSize: 22.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
-
-            const SizedBox(height: 20),
-
-            // ----------- TextField ----------- //
+            SizedBox(height: 20.h),
             TextField(
               controller: controller,
               style: const TextStyle(color: Colors.white),
@@ -45,18 +42,18 @@ class _AddProjectDialogState extends ConsumerState<AddProjectDialog> {
                 hintStyle: TextStyle(color: Colors.white54),
                 filled: true,
                 fillColor: Colors.white.withValues(alpha: 0.07),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16.w,
+                  vertical: 14.h,
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(14.r),
                   borderSide: BorderSide(
                     color: Colors.white.withValues(alpha: 0.2),
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(14.r),
                   borderSide: const BorderSide(
                     color: Colors.deepPurpleAccent,
                     width: 1.2,
@@ -64,10 +61,7 @@ class _AddProjectDialogState extends ConsumerState<AddProjectDialog> {
                 ),
               ),
             ),
-
-            const SizedBox(height: 24),
-
-            // ----------- Buttons ----------- //
+            SizedBox(height: 24.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -77,18 +71,18 @@ class _AddProjectDialogState extends ConsumerState<AddProjectDialog> {
                   child: const Text("Cancel"),
                 ),
 
-                const SizedBox(width: 8),
+                SizedBox(width: 8.w),
 
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepPurpleAccent,
                     foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 22,
-                      vertical: 12,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 22.w,
+                      vertical: 12.h,
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(14.r),
                     ),
                     elevation: 3,
                   ),
@@ -100,9 +94,12 @@ class _AddProjectDialogState extends ConsumerState<AddProjectDialog> {
                       Navigator.pop(context);
                     }
                   },
-                  child: const Text(
+                  child: Text(
                     "Add",
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15.sp,
+                    ),
                   ),
                 ),
               ],
