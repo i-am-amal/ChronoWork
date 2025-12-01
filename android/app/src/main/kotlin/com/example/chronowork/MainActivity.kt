@@ -1,4 +1,4 @@
-package com.example.chronowork
+package com.amal.chronowork
 
 import io.flutter.embedding.android.FlutterActivity
 
